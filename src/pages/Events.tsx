@@ -45,10 +45,10 @@ const Events = () => {
 
   return (
     <div className="py-16 bg-gray-50 space-y-14">
-      <section className="mt-6">
+      <section className="my-6">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-4xl font-bold text-gray-900 my-4">
               Find Your Perfect Event
             </h2>
             <p className="text-xl text-gray-600">
@@ -91,13 +91,10 @@ const Events = () => {
       </section>
       <section>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
+          <div className="text-center my-10">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">
               All Events
             </h2>
-            <p className="text-xl text-gray-600">
-              Don't miss these amazing upcoming events
-            </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
