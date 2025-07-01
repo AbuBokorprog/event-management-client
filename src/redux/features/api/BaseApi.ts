@@ -65,15 +65,6 @@ const customBaseQuery: BaseQueryFn<
 export const baseApi = createApi({
   reducerPath: 'baseApi',
   baseQuery: customBaseQuery,
-  endpoints: (builder) => ({
-    getPokemonByName: builder.query({
-      query: (name) => ({
-        url: `pokemon/${name}`,
-      }),
-    }),
-  }),
+  tagTypes: ['Event', 'User', 'JoinEvent'],
+  endpoints: () => ({}),
 });
-
-// Export hooks for usage in functional components, which are
-// auto-generated based on the defined endpoints
-export const { useGetPokemonByNameQuery } = baseApi;
