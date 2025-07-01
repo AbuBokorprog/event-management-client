@@ -1,45 +1,15 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Link } from 'react-router-dom';
 import EventCard from '../events/EventCard';
+import { useGetAllEventsQuery } from '../../redux/features/api/eventApi';
+import EventLoader from '../EventLoader';
 
 const FeaturedEvents = () => {
-  const events = [
-    {
-      id: 1,
-      title: 'Summer Music Festival',
-      date: 'July 15, 2025',
-      location: 'Central Park, NY',
-      image:
-        'https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=400',
-      price: '$45',
-      category: 'Music',
-      attendees: 1250,
-      rating: 4.8,
-    },
-    {
-      id: 2,
-      title: 'Tech Innovation Summit',
-      date: 'August 2, 2025',
-      location: 'Silicon Valley, CA',
-      image:
-        'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=400',
-      price: '$120',
-      category: 'Technology',
-      attendees: 890,
-      rating: 4.9,
-    },
-    {
-      id: 3,
-      title: 'Art & Culture Expo',
-      date: 'July 28, 2025',
-      location: 'Museum District, TX',
-      image:
-        'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=400',
-      price: '$25',
-      category: 'Art',
-      attendees: 650,
-      rating: 4.7,
-    },
-  ];
+  const { data, isFetching, isLoading } = useGetAllEventsQuery({});
+
+  if (isFetching || isLoading) {
+    return <EventLoader />;
+  }
 
   return (
     <section className="py-20 bg-white">
@@ -54,7 +24,7 @@ const FeaturedEvents = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {events.map((event) => (
+          {data?.data?.slice(0, 5)?.map((event: any) => (
             <EventCard event={event} />
           ))}
         </div>

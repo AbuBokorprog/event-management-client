@@ -17,7 +17,18 @@ export const joinEventApi = baseApi.injectEndpoints({
       }),
       providesTags: ['JoinEvent'],
     }),
+    getMyJoinedEvent: builder.query({
+      query: (id) => ({
+        url: `/join-events/my-events/details/${id}`,
+        method: 'GET',
+      }),
+      providesTags: ['JoinEvent'],
+    }),
   }),
 });
 
-export const { useJoinEventMutation, useGetMyJoinedEventsQuery } = joinEventApi;
+export const {
+  useJoinEventMutation,
+  useGetMyJoinedEventsQuery,
+  useGetMyJoinedEventQuery,
+} = joinEventApi;

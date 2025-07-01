@@ -1,11 +1,37 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Calendar, Heart, MapPin, Share2, Star, Users } from 'lucide-react';
+import { Calendar, Heart, MapPin, Share2, Users } from 'lucide-react';
 import React from 'react';
+import {
+  useGetMyJoinedEventQuery,
+  useJoinEventMutation,
+} from '../../redux/features/api/joinEventApi';
+import { useAuth } from '../../provider/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 const EventCard: React.FC<any> = ({ event }) => {
+  const { user } = useAuth();
+  const navigate = useNavigate();
+  const [joinEvent] = useJoinEventMutation();
+
+  const { data } = useGetMyJoinedEventQuery(event._id);
+
+  const joinEventHandler = (id: number) => {
+    if (!user?.email) {
+      navigate('/login');
+      return;
+    }
+    const payload = { userId: user?.id, eventId: id };
+
+    try {
+      joinEvent(payload).unwrap();
+    } catch (error: any) {
+      alert(error?.data?.message || 'Something went wrong!.');
+    }
+  };
+
   return (
     <div
-      key={event.id}
+      key={event._id}
       className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 group"
     >
       <div className="relative overflow-hidden">
@@ -51,19 +77,30 @@ const EventCard: React.FC<any> = ({ event }) => {
                 {event.attendeeCount} attending
               </span>
             </div>
-            <div className="flex items-center space-x-1">
+            {/* <div className="flex items-center space-x-1">
               <Star className="w-4 h-4 text-yellow-400 fill-current" />
               <span className="text-sm text-gray-600">{event.rating}</span>
-            </div>
+            </div> */}
           </div>
           <span className="text-2xl font-bold text-purple-600">
             {event.price}
           </span>
         </div>
-
-        <button className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 rounded-lg font-semibold hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-200">
-          Get Tickets
-        </button>
+        {data?.data ? (
+          <button
+            disabled
+            className="w-full bg-gray-500 text-white py-3 rounded-lg font-semibold hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-200"
+          >
+            Already Joined
+          </button>
+        ) : (
+          <button
+            onClick={() => joinEventHandler(event?._id)}
+            className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 rounded-lg font-semibold hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-200"
+          >
+            Get Tickets
+          </button>
+        )}
       </div>
     </div>
   );

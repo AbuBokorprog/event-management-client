@@ -31,7 +31,7 @@ const customBaseQuery: BaseQueryFn<
 > = async (args, api, extraOptions): Promise<any> => {
   let result: any = await baseQuery(args, api, extraOptions);
 
-  console.log(result);
+  // console.log(result);
   if (result?.error) {
     toast.error(result?.error?.data?.message as string);
   }

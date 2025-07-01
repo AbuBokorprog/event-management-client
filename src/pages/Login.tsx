@@ -16,7 +16,6 @@ import {
 import { useLoginMutation } from '../redux/features/api/authApi';
 import { useDispatch } from 'react-redux';
 import { login } from '../redux/features/auth-slice/AuthSlice';
-import { redirect } from 'react-router-dom';
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -50,8 +49,7 @@ const Login = () => {
       );
 
       alert(`Welcome back, ${response?.data.user.name || 'User'}!`);
-      redirect('/');
-      loginForm.reset();
+      window.history.back();
     } catch (error: any) {
       console.error('Login failed:', error);
       alert(error?.data?.message || 'Login failed! Please check credentials.');
