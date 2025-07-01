@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import {
   Eye,
@@ -11,6 +12,8 @@ import {
   Check,
   AlertCircle,
 } from 'lucide-react';
+import { useRegisterMutation } from '../redux/features/api/authApi';
+import { Link, redirect } from 'react-router-dom';
 
 interface FormData {
   firstName: string;
@@ -27,12 +30,13 @@ const Registration: React.FC = () => {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
-
+  const [registerUser] = useRegisterMutation();
   const {
     register,
     handleSubmit,
     watch,
     trigger,
+    reset,
     formState: { errors, isValid, touchedFields },
   } = useForm<FormData>({
     mode: 'onChange',
@@ -47,16 +51,35 @@ const Registration: React.FC = () => {
     },
   });
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const password = watch('password');
   const watchedFields = watch();
 
   const onSubmit = async (data: FormData) => {
-    setIsSubmitting(true);
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-    console.log('Registration data:', data);
-    setIsSubmitting(false);
-    alert('Registration successful!');
+    const payload = {
+      ...data,
+      name: data.firstName + ' ' + data.lastName,
+    };
+
+    try {
+      setIsSubmitting(true);
+
+      const res = await registerUser(payload).unwrap();
+      console.log('Registration successful:', res);
+
+      alert('Registration successful!');
+      redirect('/login');
+      reset();
+    } catch (error: any) {
+      console.error('Registration failed:', error);
+      alert(error?.data?.message || 'Something went wrong!');
+    } finally {
+      setIsSubmitting(false);
+      setCurrentStep(1);
+    }
   };
 
   const nextStep = async () => {
@@ -501,12 +524,12 @@ const Registration: React.FC = () => {
             <div className="text-center pt-4 border-t border-gray-200">
               <p className="text-gray-600 font-medium">
                 Already have an account?{' '}
-                <a
-                  href="#"
+                <Link
+                  to="/login"
                   className="text-purple-600 hover:text-purple-800 font-semibold underline underline-offset-2 transition-colors"
                 >
                   Sign in here
-                </a>
+                </Link>
               </p>
             </div>
           </div>

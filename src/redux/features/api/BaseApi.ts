@@ -12,7 +12,7 @@ import { login, logout } from '../auth-slice/AuthSlice';
 import type { RootState } from '../../store';
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: 'https://pokeapi.co/api/v2/',
+  baseUrl: 'http://localhost:5000',
   credentials: 'include',
   prepareHeaders: (headers, { getState }) => {
     const token = (getState() as RootState).auth.token;

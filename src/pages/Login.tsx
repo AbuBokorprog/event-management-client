@@ -1,4 +1,5 @@
-import { useState } from 'react';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import {
   Eye,
@@ -12,11 +13,16 @@ import {
   // Chrome,
   // Facebook,
 } from 'lucide-react';
+import { useLoginMutation } from '../redux/features/api/authApi';
+import { useDispatch } from 'react-redux';
+import { login } from '../redux/features/auth-slice/AuthSlice';
+import { redirect } from 'react-router-dom';
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-
+  const dispatch = useDispatch();
+  const [loginUser] = useLoginMutation();
   const loginForm = useForm({
     defaultValues: {
       email: '',
@@ -25,13 +31,33 @@ const Login = () => {
     },
   });
 
-  const onLogin = async (data) => {
-    setIsLoading(true);
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-    setIsLoading(false);
-    alert(`Welcome back! Logged in with: ${data.email}`);
-    loginForm.reset();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  const onLogin = async (data: { email: string; password: string }) => {
+    try {
+      setIsLoading(true);
+
+      const response = await loginUser(data).unwrap(); // POST { email, password }
+
+      // Save user and token to redux store
+      dispatch(
+        login({
+          user: response?.data.user,
+          token: response?.data.access_token,
+        })
+      );
+
+      alert(`Welcome back, ${response?.data.user.name || 'User'}!`);
+      redirect('/');
+      loginForm.reset();
+    } catch (error: any) {
+      console.error('Login failed:', error);
+      alert(error?.data?.message || 'Login failed! Please check credentials.');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const togglePasswordVisibility = () => setShowPassword(!showPassword);

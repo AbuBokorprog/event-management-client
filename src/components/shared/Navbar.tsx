@@ -1,8 +1,14 @@
 import { useState, useEffect } from 'react';
 import { Calendar, Menu, X } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import type { RootState } from '../../redux/store';
+import decodeToken from '../../utils/decodeToken';
 
 const Navbar = () => {
+  const { token } = useSelector((state: RootState) => state.auth);
+  const user = decodeToken(token as string);
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -15,7 +21,6 @@ const Navbar = () => {
   }, []);
 
   useEffect(() => {
-    // Prevent background scroll when mobile menu is open
     if (isMenuOpen) {
       document.body.classList.add('overflow-hidden');
     } else {
@@ -65,22 +70,42 @@ const Navbar = () => {
           </div>
 
           {/* Desktop Auth */}
-          <div className="hidden md:flex items-center space-x-2 sm:space-x-4">
-            <Link
-              to="/login"
-              className={`text-sm sm:text-base ${
-                isScrolled ? 'text-gray-700' : 'text-wite'
-              } hover:text-purple-600 transition-colors font-medium`}
-            >
-              Sign In
-            </Link>
-            <Link
-              to="/register"
-              className="text-sm sm:text-base bg-gradient-to-r from-purple-600 to-pink-600 text-white px-4 py-2 sm:px-6 sm:py-2.5 rounded-full hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-200"
-            >
-              Sign Up
-            </Link>
-          </div>
+          {user?.email ? (
+            <div className="hidden md:flex items-center space-x-2 sm:space-x-4">
+              <Link
+                to="/my-events"
+                className={`text-sm sm:text-base ${
+                  isScrolled ? 'text-gray-700' : 'text-wite'
+                } hover:text-purple-600 transition-colors font-medium`}
+              >
+                My Events
+              </Link>
+              <>
+                {user?.photoUrl ? (
+                  <img src={user?.photoUrl} alt={user?.name} />
+                ) : (
+                  <div className="bg-gray-300 rounded-full w-12 h-12"></div>
+                )}
+              </>
+            </div>
+          ) : (
+            <div className="hidden md:flex items-center space-x-2 sm:space-x-4">
+              <Link
+                to="/login"
+                className={`text-sm sm:text-base ${
+                  isScrolled ? 'text-gray-700' : 'text-wite'
+                } hover:text-purple-600 transition-colors font-medium`}
+              >
+                Sign In
+              </Link>
+              <Link
+                to="/register"
+                className="text-sm sm:text-base bg-gradient-to-r from-purple-600 to-pink-600 text-white px-4 py-2 sm:px-6 sm:py-2.5 rounded-full hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-200"
+              >
+                Sign Up
+              </Link>
+            </div>
+          )}
 
           {/* Mobile Menu Button */}
           <button
@@ -114,24 +139,45 @@ const Navbar = () => {
 
           <hr className="my-4 border-gray-300" />
 
-          <div className="space-y-2">
-            <Link
-              to="/login"
-              onClick={() => setIsMenuOpen(false)}
-              className={`block ${
-                isScrolled ? 'text-gray-700' : 'text-wite'
-              } text-base font-medium hover:text-purple-600 transition-colors`}
-            >
-              Sign In
-            </Link>
-            <Link
-              to="/register"
-              onClick={() => setIsMenuOpen(false)}
-              className="block bg-gradient-to-r from-purple-600 to-pink-600 text-white text-center py-2.5 rounded-full font-medium"
-            >
-              Sign Up
-            </Link>
-          </div>
+          {user?.email ? (
+            <div className="space-y-2">
+              <Link
+                to="/my-events"
+                onClick={() => setIsMenuOpen(false)}
+                className={`block ${
+                  isScrolled ? 'text-gray-700' : 'text-wite'
+                } text-base font-medium hover:text-purple-600 transition-colors`}
+              >
+                My Events
+              </Link>
+              <>
+                {user?.photoUrl ? (
+                  <img src={user?.photoUrl} alt={user?.name} />
+                ) : (
+                  <div className="bg-gray-300 rounded-full w-12 h-12"></div>
+                )}
+              </>
+            </div>
+          ) : (
+            <div className="space-y-2">
+              <Link
+                to="/login"
+                onClick={() => setIsMenuOpen(false)}
+                className={`block ${
+                  isScrolled ? 'text-gray-700' : 'text-wite'
+                } text-base font-medium hover:text-purple-600 transition-colors`}
+              >
+                Sign In
+              </Link>
+              <Link
+                to="/register"
+                onClick={() => setIsMenuOpen(false)}
+                className="block bg-gradient-to-r from-purple-600 to-pink-600 text-white text-center py-2.5 rounded-full font-medium"
+              >
+                Sign Up
+              </Link>
+            </div>
+          )}
         </div>
       )}
     </nav>

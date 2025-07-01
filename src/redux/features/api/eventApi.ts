@@ -1,4 +1,4 @@
-import { baseApi } from './BaseApi';
+import { baseApi } from './baseApi';
 
 export const eventApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
