@@ -13,7 +13,7 @@ import { Link } from 'react-router-dom';
 
 const EventError = () => {
   const [glitchActive, setGlitchActive] = useState(false);
-  const [errorCode] = useState('404');
+  const [errorCode] = useState<string>('404');
   const [retryCount, setRetryCount] = useState(0);
   const [isRetrying, setIsRetrying] = useState(false);
 
@@ -53,7 +53,8 @@ const EventError = () => {
     },
   };
 
-  const currentError = errorMessages[errorCode] || errorMessages['404'];
+  const currentError =
+    errorMessages[errorCode as '404' | '500' | '403'] || errorMessages['404'];
 
   useEffect(() => {
     const glitchInterval = setInterval(() => {

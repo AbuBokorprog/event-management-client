@@ -1,5 +1,3 @@
-// components/Footer.js
-import React from 'react';
 import { Calendar } from 'lucide-react';
 
 const Footer = () => {

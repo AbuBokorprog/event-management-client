@@ -1,5 +1,3 @@
-// components/Categories.js
-import React from 'react';
 import { Music, Trophy, Camera, Users, Clock } from 'lucide-react';
 
 const Categories = () => {
