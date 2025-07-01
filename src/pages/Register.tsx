@@ -114,8 +114,8 @@ const Registration: React.FC = () => {
   return (
     <div className="min-h-screen py-16 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex items-center justify-center p-4 relative overflow-hidden">
       {/* Animated Background Elements */}
-      <div className="absolute inset-0 bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900">
-        <div className="absolute inset-0 bg-black/20"></div>
+      <div className="absolute inset-0 bg-gradient-to-br from-purple-50 via-pink-50 to-indigo-50">
+        <div className="absolute inset-0 bg-gradient-to-r from-purple-600/10 to-pink-600/10"></div>
         <div className="absolute top-20 left-10 w-20 h-20 bg-purple-500/30 rounded-full blur-xl animate-pulse"></div>
         <div className="absolute top-40 right-20 w-32 h-32 bg-pink-500/30 rounded-full blur-xl animate-pulse delay-1000"></div>
         <div className="absolute bottom-32 left-1/4 w-24 h-24 bg-blue-500/30 rounded-full blur-xl animate-pulse delay-2000"></div>
@@ -128,25 +128,25 @@ const Registration: React.FC = () => {
             <div
               className={`w-3 h-3 rounded-full transition-all duration-300 ${
                 currentStep >= 1
-                  ? 'bg-purple-500 shadow-lg shadow-purple-500/50'
-                  : 'bg-white/20'
+                  ? 'bg-pink-500 shadow-lg shadow-purple-500/50'
+                  : 'bg-black/20'
               }`}
             ></div>
             <div
               className={`h-0.5 w-16 transition-all duration-300 ${
-                currentStep >= 2 ? 'bg-purple-500' : 'bg-white/20'
+                currentStep >= 2 ? 'bg-pink-500' : 'bg-black/20'
               }`}
             ></div>
             <div
               className={`w-3 h-3 rounded-full transition-all duration-300 ${
                 currentStep >= 2
-                  ? 'bg-purple-500 shadow-lg shadow-purple-500/50'
-                  : 'bg-white/20'
+                  ? 'bg-pink-500 shadow-lg shadow-purple-500/50'
+                  : 'bg-black/20'
               }`}
             ></div>
           </div>
           <div className="text-center mt-4">
-            <p className="text-white/60 text-sm">
+            <p className="text-black/60 text-sm">
               Step {currentStep} of 2 -{' '}
               {currentStep === 1
                 ? 'Personal Information'
@@ -156,20 +156,20 @@ const Registration: React.FC = () => {
         </div>
 
         {/* Header */}
-        <div className="text-center mb-8">
+        <div className="text-center my-4">
           <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-purple-500 via-purple-600 to-pink-500 rounded-3xl mb-6 shadow-2xl shadow-purple-500/25 transform hover:scale-105 transition-transform duration-300">
             <UserPlus className="w-10 h-10 text-white" />
           </div>
-          <h1 className="text-4xl font-bold  mb-3 tracking-tight bg-gradient-to-r from-white to-purple-200 bg-clip-text text-transparent">
+          <h1 className="text-4xl font-bold  mb-3 tracking-tight text-black">
             Create Account
           </h1>
-          <p className="text-gray-300 text-lg font-light">
+          <p className="text-gray-900 text-lg font-light">
             Join thousands of users and start your journey
           </p>
         </div>
 
         {/* Registration Form */}
-        <div className="bg-white/10 backdrop-blur-xl rounded-3xl shadow-2xl p-8 border border-white/20 relative overflow-hidden">
+        <div className="bg-white/10 backdrop-blur-xl rounded-3xl shadow-2xl p-8 border border-black/20 relative overflow-hidden">
           <div className="space-y-6">
             {/* Step 1: Personal Information */}
             {currentStep === 1 && (
@@ -179,13 +179,13 @@ const Registration: React.FC = () => {
                   <div className="space-y-2">
                     <label
                       htmlFor="firstName"
-                      className="block text-white/90 text-sm font-semibold mb-3"
+                      className="block text-black/90 text-sm font-semibold mb-3"
                     >
                       First Name
                       <FieldIcon status={getFieldStatus('firstName')} />
                     </label>
                     <div className="relative group">
-                      <User className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400 group-focus-within:text-purple-500 transition-colors" />
+                      <User className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-900 group-focus-within:text-purple-500 transition-colors" />
                       <input
                         {...register('firstName', {
                           required: 'First name is required',
@@ -196,7 +196,7 @@ const Registration: React.FC = () => {
                         })}
                         type="text"
                         id="firstName"
-                        className="w-full pl-12 pr-4 py-4 bg-white/5 border border-white/10 rounded-xl text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent transition-all duration-300 hover:bg-white/10"
+                        className="w-full pl-12 pr-4 py-4 bg-black/5 border border-black/10 rounded-xl text-black placeholder-black/80 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent transition-all duration-300 hover:bg-black/10"
                         placeholder="Enter your first name"
                       />
                     </div>
@@ -211,13 +211,13 @@ const Registration: React.FC = () => {
                   <div className="space-y-2">
                     <label
                       htmlFor="lastName"
-                      className="block text-white/90 text-sm font-semibold mb-3"
+                      className="block text-black/90 text-sm font-semibold mb-3"
                     >
                       Last Name
                       <FieldIcon status={getFieldStatus('lastName')} />
                     </label>
                     <div className="relative group">
-                      <User className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400 group-focus-within:text-purple-500 transition-colors" />
+                      <User className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-900 group-focus-within:text-purple-500 transition-colors" />
                       <input
                         {...register('lastName', {
                           required: 'Last name is required',
@@ -228,7 +228,7 @@ const Registration: React.FC = () => {
                         })}
                         type="text"
                         id="lastName"
-                        className="w-full pl-12 pr-4 py-4 bg-white/5 border border-white/10 rounded-xl text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent transition-all duration-300 hover:bg-white/10"
+                        className="w-full pl-12 pr-4 py-4 bg-black/5 border border-black/10 rounded-xl text-black placeholder-black/80 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent transition-all duration-300 hover:bg-black/10"
                         placeholder="Enter your last name"
                       />
                     </div>
@@ -245,13 +245,13 @@ const Registration: React.FC = () => {
                 <div className="space-y-2">
                   <label
                     htmlFor="email"
-                    className="block text-white/90 text-sm font-semibold mb-3"
+                    className="block text-black/90 text-sm font-semibold mb-3"
                   >
                     Email Address
                     <FieldIcon status={getFieldStatus('email')} />
                   </label>
                   <div className="relative group">
-                    <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400 group-focus-within:text-purple-500 transition-colors" />
+                    <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-900 group-focus-within:text-purple-500 transition-colors" />
                     <input
                       {...register('email', {
                         required: 'Email is required',
@@ -262,7 +262,7 @@ const Registration: React.FC = () => {
                       })}
                       type="email"
                       id="email"
-                      className="w-full pl-12 pr-4 py-4 bg-white/5 border border-white/10 rounded-xl text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent transition-all duration-300 hover:bg-white/10"
+                      className="w-full pl-12 pr-4 py-4 bg-black/5 border border-black/10 rounded-xl text-black placeholder-black/80 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent transition-all duration-300 hover:bg-black/10"
                       placeholder="Enter your email address"
                     />
                   </div>
@@ -278,16 +278,16 @@ const Registration: React.FC = () => {
                 <div className="space-y-2">
                   <label
                     htmlFor="photoUrl"
-                    className="block text-white/90 text-sm font-semibold mb-3"
+                    className="block text-black/90 text-sm font-semibold mb-3"
                   >
                     Profile Photo URL
-                    <span className="text-xs ms-4 text-gray-500 bg-gray-100 px-2 py-1 rounded-full">
+                    <span className="text-xs ms-4 text-gray-900 bg-gray-100 px-2 py-1 rounded-full">
                       Optional
                     </span>
                     <FieldIcon status={getFieldStatus('photoUrl')} />
                   </label>
                   <div className="relative group">
-                    <Camera className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400 group-focus-within:text-purple-500 transition-colors" />
+                    <Camera className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-900 group-focus-within:text-purple-500 transition-colors" />
                     <input
                       {...register('photoUrl', {
                         pattern: {
@@ -298,7 +298,7 @@ const Registration: React.FC = () => {
                       })}
                       type="url"
                       id="photoUrl"
-                      className="w-full pl-12 pr-4 py-4 bg-white/5 border border-white/10 rounded-xl text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent transition-all duration-300 hover:bg-white/10"
+                      className="w-full pl-12 pr-4 py-4 bg-black/5 border border-black/10 rounded-xl text-black placeholder-black/80 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent transition-all duration-300 hover:bg-black/10"
                       placeholder="https://example.com/your-photo.jpg"
                     />
                   </div>
@@ -327,13 +327,13 @@ const Registration: React.FC = () => {
                 <div className="space-y-2">
                   <label
                     htmlFor="password"
-                    className="block text-white/90 text-sm font-semibold mb-3"
+                    className="block text-black/90 text-sm font-semibold mb-3"
                   >
                     Password
                     <FieldIcon status={getFieldStatus('password')} />
                   </label>
                   <div className="relative group">
-                    <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400 group-focus-within:text-purple-500 transition-colors" />
+                    <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-900 group-focus-within:text-purple-500 transition-colors" />
                     <input
                       {...register('password', {
                         required: 'Password is required',
@@ -349,13 +349,13 @@ const Registration: React.FC = () => {
                       })}
                       type={showPassword ? 'text' : 'password'}
                       id="password"
-                      className="w-full pl-12 pr-4 py-4 bg-white/5 border border-white/10 rounded-xl text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent transition-all duration-300 hover:bg-white/10"
+                      className="w-full pl-12 pr-4 py-4 bg-black/5 border border-black/10 rounded-xl text-black placeholder-black/80 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent transition-all duration-300 hover:bg-black/10"
                       placeholder="Create a strong password"
                     />
                     <button
                       type="button"
                       onClick={() => setShowPassword(!showPassword)}
-                      className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-purple-500 transition-colors p-1"
+                      className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-900 hover:text-purple-500 transition-colors p-1"
                     >
                       {showPassword ? (
                         <EyeOff className="w-5 h-5" />
@@ -409,13 +409,13 @@ const Registration: React.FC = () => {
                 <div className="space-y-2">
                   <label
                     htmlFor="confirmPassword"
-                    className="block text-white/90 text-sm font-semibold mb-3"
+                    className="block text-black/90 text-sm font-semibold mb-3"
                   >
                     Confirm Password
                     <FieldIcon status={getFieldStatus('confirmPassword')} />
                   </label>
                   <div className="relative group">
-                    <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400 group-focus-within:text-purple-500 transition-colors" />
+                    <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-900 group-focus-within:text-purple-500 transition-colors" />
                     <input
                       {...register('confirmPassword', {
                         required: 'Please confirm your password',
@@ -424,7 +424,7 @@ const Registration: React.FC = () => {
                       })}
                       type={showConfirmPassword ? 'text' : 'password'}
                       id="confirmPassword"
-                      className="w-full pl-12 pr-4 py-4 bg-white/5 border border-white/10 rounded-xl text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent transition-all duration-300 hover:bg-white/10"
+                      className="w-full pl-12 pr-4 py-4 bg-black/5 border border-black/10 rounded-xl text-black placeholder-black/80 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent transition-all duration-300 hover:bg-black/10"
                       placeholder="Confirm your password"
                     />
                     <button
@@ -432,7 +432,7 @@ const Registration: React.FC = () => {
                       onClick={() =>
                         setShowConfirmPassword(!showConfirmPassword)
                       }
-                      className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-purple-500 transition-colors p-1"
+                      className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-900 hover:text-purple-500 transition-colors p-1"
                     >
                       {showConfirmPassword ? (
                         <EyeOff className="w-5 h-5" />
@@ -458,7 +458,7 @@ const Registration: React.FC = () => {
                       })}
                       type="checkbox"
                       id="acceptTerms"
-                      className="mt-1 w-5 h-5 text-purple-600 bg-white border-2 border-gray-300 rounded focus:ring-purple-500 focus:ring-2"
+                      className="mt-1 w-5 h-5 text-purple-600 bg-black border-2 border-gray-300 rounded focus:ring-purple-500 focus:ring-2"
                     />
                     <label
                       htmlFor="acceptTerms"
@@ -501,7 +501,7 @@ const Registration: React.FC = () => {
                     type="button"
                     onClick={handleSubmit(onSubmit)}
                     disabled={!isValid || isSubmitting}
-                    className={`flex-2 py-4 px-6 rounded-xl font-semibold text-white transition-all duration-300 focus:ring-4 focus:ring-purple-200 ${
+                    className={`flex-2 py-4 px-6 rounded-xl font-semibold text-black transition-all duration-300 focus:ring-4 focus:ring-purple-200 ${
                       !isValid || isSubmitting
                         ? 'bg-gray-400 cursor-not-allowed'
                         : 'bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5'
@@ -509,7 +509,7 @@ const Registration: React.FC = () => {
                   >
                     {isSubmitting ? (
                       <div className="flex items-center justify-center gap-2">
-                        <div className="w-5 h-5 border-t-2 border-white rounded-full animate-spin"></div>
+                        <div className="w-5 h-5 border-t-2 border-black rounded-full animate-spin"></div>
                         Creating Account...
                       </div>
                     ) : (
@@ -526,7 +526,7 @@ const Registration: React.FC = () => {
                 Already have an account?{' '}
                 <Link
                   to="/login"
-                  className="text-purple-600 hover:text-purple-800 font-semibold underline underline-offset-2 transition-colors"
+                  className="text-purple-700 hover:text-purple-800 font-semibold underline underline-offset-2 transition-colors"
                 >
                   Sign in here
                 </Link>

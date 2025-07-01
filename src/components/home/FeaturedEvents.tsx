@@ -32,7 +32,7 @@ const FeaturedEvents = () => {
         <div className="text-center mt-12">
           <Link
             to={'/events'}
-            className="bg-transparent border-2 border-purple-600 text-purple-600 px-8 py-3 rounded-full font-semibold hover:bg-purple-600 hover:text-white transition-all duration-200"
+            className=" bg-gradient-to-r from-purple-600 to-pink-600 bg-transparent  text-white px-8 py-3 rounded-full font-semibold transition-all duration-200"
           >
             View All Events
           </Link>

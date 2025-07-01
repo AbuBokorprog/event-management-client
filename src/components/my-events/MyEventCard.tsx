@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Calendar, MapPin, Users, Pencil, Trash } from 'lucide-react';
+import moment from 'moment';
 import React from 'react';
 
 type MyEventCardProps = {
@@ -43,7 +44,9 @@ const MyEventCard: React.FC<MyEventCardProps> = ({
         <div className="flex flex-wrap gap-4 text-gray-600 text-sm">
           <div className="flex items-center gap-1">
             <Calendar className="w-4 h-4" />
-            {new Date(event.dateTime).toLocaleString()}
+            <span className="text-sm">
+              {moment(event.dateTime).format('MMMM D, YYYY [at] h:mm A')}
+            </span>
           </div>
           <div className="flex items-center gap-1">
             <MapPin className="w-4 h-4" />

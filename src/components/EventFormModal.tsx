@@ -7,6 +7,7 @@ import {
   useUpdateEventMutation,
 } from '../redux/features/api/eventApi';
 import { useAuth } from '../provider/AuthContext';
+import moment from 'moment';
 
 interface EventFormModalProps {
   isOpen: boolean;
@@ -51,6 +52,7 @@ const EventFormModal = ({ isOpen, onClose, event }: EventFormModalProps) => {
         location: event?.location || '',
         description: event?.description || '',
         attendeeCount: event?.attendeeCount || 0,
+        photoUrl: event?.photoUrl || '',
       });
     }
   }, [event, isOpen, reset]);
@@ -58,6 +60,7 @@ const EventFormModal = ({ isOpen, onClose, event }: EventFormModalProps) => {
   const onSubmit = async (data: any) => {
     data.userId = user?.id;
     data.attendeeCount = Number(data.attendeeCount);
+    data.dateTime = moment(event?.dateTime).toISOString();
     try {
       if (isEditMode) {
         await updateEvent({ id: event._id, body: data }).unwrap();

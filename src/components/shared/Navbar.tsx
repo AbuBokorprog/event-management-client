@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Calendar, Menu, X } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../provider/AuthContext';
+import ProfileMenu from './ProfileMenu';
 
 const Navbar = () => {
   const { user, logoutHandler } = useAuth();
@@ -76,16 +77,8 @@ const Navbar = () => {
               >
                 My Events
               </Link>
-              <button onClick={logoutHandler} className="cursor-pointer">
-                Logout
-              </button>
-              <>
-                {user?.photoUrl ? (
-                  <img src={user?.photoUrl} alt={user?.name} />
-                ) : (
-                  <div className="bg-gray-300 rounded-full w-12 h-12"></div>
-                )}
-              </>
+
+              <ProfileMenu user={user} logoutHandler={logoutHandler} />
             </div>
           ) : (
             <div className="hidden md:flex items-center space-x-2 sm:space-x-4">
@@ -149,16 +142,7 @@ const Navbar = () => {
               >
                 My Events
               </Link>
-              <button onClick={logoutHandler} className="cursor-pointer">
-                Logout
-              </button>
-              <>
-                {user?.photoUrl ? (
-                  <img src={user?.photoUrl} alt={user?.name} />
-                ) : (
-                  <div className="bg-gray-300 rounded-full w-12 h-12"></div>
-                )}
-              </>
+              <ProfileMenu user={user} logoutHandler={logoutHandler} />
             </div>
           ) : (
             <div className="space-y-2">

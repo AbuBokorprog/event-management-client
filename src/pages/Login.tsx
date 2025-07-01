@@ -16,6 +16,7 @@ import {
 import { useLoginMutation } from '../redux/features/api/authApi';
 import { useDispatch } from 'react-redux';
 import { login } from '../redux/features/auth-slice/AuthSlice';
+import { Link } from 'react-router-dom';
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -63,8 +64,8 @@ const Login = () => {
   return (
     <div className="min-h-screen pt-20 pb-16 bg-gradient-to-br from-violet-900 via-purple-900 to-indigo-900 flex items-center justify-center p-4 relative overflow-hidden">
       {/* Animated Background Elements */}
-      <div className="absolute inset-0 bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900">
-        <div className="absolute inset-0 bg-black/20"></div>
+      <div className="absolute inset-0 bg-gradient-to-br from-purple-50 via-pink-50 to-indigo-50">
+        <div className="absolute inset-0 bg-gradient-to-r from-purple-600/10 to-pink-600/10"></div>
         <div className="absolute top-20 left-10 w-20 h-20 bg-purple-500/30 rounded-full blur-xl animate-pulse"></div>
         <div className="absolute top-40 right-20 w-32 h-32 bg-pink-500/30 rounded-full blur-xl animate-pulse delay-1000"></div>
         <div className="absolute bottom-32 left-1/4 w-24 h-24 bg-blue-500/30 rounded-full blur-xl animate-pulse delay-2000"></div>
@@ -77,25 +78,25 @@ const Login = () => {
           <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-violet-500 to-purple-500 rounded-3xl mb-6 shadow-2xl">
             <Sparkles className="w-10 h-10 text-white" />
           </div>
-          <h1 className="text-4xl font-bold text-white mb-3 tracking-tight">
+          <h1 className="text-4xl font-bold text-black mb-3 tracking-tight">
             Welcome Back
           </h1>
-          <p className="text-white/70 text-lg">
+          <p className="text-black/70 text-lg">
             Sign in to continue your journey
           </p>
         </div>
         {/* Login Card */}
-        <div className="bg-white/10 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/20 overflow-hidden">
+        <div className="bg-white/10 backdrop-blur-xl rounded-3xl shadow-2xl border border-black/20 overflow-hidden">
           {/* Login Form */}
           <div className="p-8">
             <div className="space-y-6">
               {/* Email Field */}
               <div>
-                <label className="block text-white/90 text-sm font-semibold mb-3">
+                <label className="block text-black/90 text-sm font-semibold mb-3">
                   Email Address
                 </label>
                 <div className="relative group">
-                  <Mail className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-white/50 group-focus-within:text-violet-400 transition-colors" />
+                  <Mail className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-black/50 group-focus-within:text-violet-400 transition-colors" />
                   <input
                     {...loginForm.register('email', {
                       required: 'Email is required',
@@ -105,7 +106,7 @@ const Login = () => {
                       },
                     })}
                     type="email"
-                    className="w-full pl-12 pr-4 py-4 bg-white/5 border border-white/10 rounded-xl text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent transition-all duration-300 hover:bg-white/10"
+                    className="w-full pl-12 pr-4 py-4 bg-white/5 border border-black/10 rounded-xl text-black placeholder-black/80 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent transition-all duration-300 hover:bg-white/10"
                     placeholder="Enter your email"
                   />
                 </div>
@@ -119,23 +120,23 @@ const Login = () => {
 
               {/* Password Field */}
               <div>
-                <label className="block text-white/90 text-sm font-semibold mb-3">
+                <label className="block text-black/90 text-sm font-semibold mb-3">
                   Password
                 </label>
                 <div className="relative group">
-                  <Lock className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-white/50 group-focus-within:text-violet-400 transition-colors" />
+                  <Lock className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-black/50 group-focus-within:text-violet-400 transition-colors" />
                   <input
                     {...loginForm.register('password', {
                       required: 'Password is required',
                     })}
                     type={showPassword ? 'text' : 'password'}
-                    className="w-full pl-12 pr-12 py-4 bg-white/5 border border-white/10 rounded-xl text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent transition-all duration-300 hover:bg-white/10"
+                    className="w-full pl-12 pr-12 py-4 bg-white/5 border border-black/10 rounded-xl text-black placeholder-black/80 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent transition-all duration-300 hover:bg-white/10"
                     placeholder="Enter your password"
                   />
                   <button
                     type="button"
                     onClick={togglePasswordVisibility}
-                    className="absolute right-4 top-1/2 transform -translate-y-1/2 text-white/50 hover:text-white/80 transition-colors focus:outline-none"
+                    className="absolute right-4 top-1/2 transform -translate-y-1/2 text-black/50 hover:text-black/80 transition-colors focus:outline-none"
                   >
                     {showPassword ? (
                       <EyeOff className="h-5 w-5" />
@@ -158,13 +159,13 @@ const Login = () => {
                   <input
                     {...loginForm.register('rememberMe')}
                     type="checkbox"
-                    className="w-4 h-4 text-violet-600 bg-white/10 border-white/30 rounded focus:ring-violet-500 focus:ring-2 focus:ring-offset-0"
+                    className="w-4 h-4 text-violet-600 bg-white/10 border-black/30 rounded focus:ring-violet-500 focus:ring-2 focus:ring-offset-0"
                   />
-                  <span className="ml-3 text-white/80 text-sm group-hover:text-white transition-colors">
+                  <span className="ml-3 text-black/80 text-sm group-hover:text-black transition-colors">
                     Remember me
                   </span>
                 </label>
-                <button className="text-violet-300 hover:text-violet-200 text-sm font-medium transition-colors focus:outline-none focus:underline">
+                <button className="text-violet-700 hover:text-violet-900 text-sm font-medium transition-colors focus:outline-none focus:underline">
                   Forgot Password?
                 </button>
               </div>
@@ -192,10 +193,10 @@ const Login = () => {
               {/* Divider */}
               {/* <div className="relative">
                 <div className="absolute inset-0 flex items-center">
-                  <div className="w-full border-t border-white/20"></div>
+                  <div className="w-full border-t border-black/20"></div>
                 </div>
                 <div className="relative flex justify-center text-sm">
-                  <span className="px-4 bg-transparent text-white/60 font-medium">
+                  <span className="px-4 bg-transparent text-black/60 font-medium">
                     Or continue with
                   </span>
                 </div>
@@ -203,11 +204,11 @@ const Login = () => {
 
               {/* Social Login */}
               {/* <div className="grid grid-cols-2 gap-4">
-                <button className="flex items-center justify-center px-4 py-3 bg-white/5 border border-white/20 rounded-xl text-white/80 hover:bg-white/10 hover:border-white/30 transition-all duration-300 group">
+                <button className="flex items-center justify-center px-4 py-3 bg-white/5 border border-black/20 rounded-xl text-black/80 hover:bg-white/10 hover:border-black/30 transition-all duration-300 group">
                   <Chrome className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
                   <span className="font-medium">Google</span>
                 </button>
-                <button className="flex items-center justify-center px-4 py-3 bg-white/5 border border-white/20 rounded-xl text-white/80 hover:bg-white/10 hover:border-white/30 transition-all duration-300 group">
+                <button className="flex items-center justify-center px-4 py-3 bg-white/5 border border-black/20 rounded-xl text-black/80 hover:bg-white/10 hover:border-black/30 transition-all duration-300 group">
                   <Facebook className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
                   <span className="font-medium">Facebook</span>
                 </button>
@@ -215,11 +216,14 @@ const Login = () => {
 
               {/* Sign Up Link */}
               <div className="text-center pt-4">
-                <p className="text-white/70">
+                <p className="text-black/70">
                   Don't have an account?{' '}
-                  <button className="text-violet-300 hover:text-violet-200 font-semibold transition-colors focus:outline-none focus:underline">
+                  <Link
+                    to={'/register'}
+                    className="text-violet-700 hover:text-violet-900 font-semibold transition-colors focus:outline-none focus:underline"
+                  >
                     Sign up for free
-                  </button>
+                  </Link>
                 </p>
               </div>
             </div>
@@ -228,7 +232,7 @@ const Login = () => {
 
         {/* Security Notice */}
         <div className="text-center mt-6">
-          <div className="flex items-center justify-center text-white/60 text-sm">
+          <div className="flex items-center justify-center text-black/60 text-sm">
             <Shield className="w-4 h-4 mr-2" />
             <span>Protected by 256-bit SSL encryption</span>
           </div>

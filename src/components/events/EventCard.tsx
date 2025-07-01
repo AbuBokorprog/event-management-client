@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Calendar, Heart, MapPin, Share2, Users } from 'lucide-react';
+import { Calendar, MapPin, Users } from 'lucide-react';
 import React from 'react';
 import {
   useGetMyJoinedEventQuery,
@@ -7,6 +7,7 @@ import {
 } from '../../redux/features/api/joinEventApi';
 import { useAuth } from '../../provider/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import moment from 'moment';
 
 const EventCard: React.FC<any> = ({ event }) => {
   const { user } = useAuth();
@@ -45,14 +46,14 @@ const EventCard: React.FC<any> = ({ event }) => {
             {event.category}
           </span>
         </div>
-        <div className="absolute top-4 right-4 flex space-x-2">
+        {/* <div className="absolute top-4 right-4 flex space-x-2">
           <button className="bg-white/90 p-2 rounded-full hover:bg-white transition-colors">
             <Heart className="w-4 h-4 text-gray-600" />
           </button>
           <button className="bg-white/90 p-2 rounded-full hover:bg-white transition-colors">
             <Share2 className="w-4 h-4 text-gray-600" />
           </button>
-        </div>
+        </div> */}
       </div>
 
       <div className="p-6">
@@ -61,7 +62,9 @@ const EventCard: React.FC<any> = ({ event }) => {
         <div className="flex items-center space-x-4 text-gray-600 mb-4">
           <div className="flex items-center space-x-1">
             <Calendar className="w-4 h-4" />
-            <span className="text-sm">{event.date}</span>
+            <span className="text-sm">
+              {moment(event.dateTime).format('MMMM D, YYYY [at] h:mm A')}
+            </span>
           </div>
           <div className="flex items-center space-x-1">
             <MapPin className="w-4 h-4" />

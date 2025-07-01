@@ -82,9 +82,9 @@ const EventError = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-red-900/20 to-slate-900 flex items-center justify-center p-4 overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-indigo-50 flex items-center justify-center p-4 overflow-hidden">
       {/* Animated Background Elements */}
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 bg-gradient-to-r from-purple-600/10 to-pink-600/10">
         {/* Floating Icons */}
         {floatingIcons.map(({ Icon, delay, duration }, index) => (
           <div
@@ -103,14 +103,6 @@ const EventError = () => {
 
         {/* Grid Pattern */}
         <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
-
-        {/* Glitch Lines */}
-        {glitchActive && (
-          <>
-            <div className="absolute top-1/4 left-0 w-full h-px bg-red-500 opacity-60 animate-pulse"></div>
-            <div className="absolute top-3/4 left-0 w-full h-px bg-blue-500 opacity-60 animate-pulse"></div>
-          </>
-        )}
       </div>
 
       <div className="relative z-10 text-center max-w-2xl mx-auto">
@@ -179,7 +171,7 @@ const EventError = () => {
 
           <Link
             to={'/'}
-            className="flex items-center justify-center px-6 py-3 bg-white/10 backdrop-blur-sm text-black rounded-lg font-medium border border-white/20 transition-all duration-300 hover:bg-white/20 hover:scale-105 group"
+            className="flex items-center justify-center px-6 py-3 bg-white/10 backdrop-blur-sm text-black rounded-lg font-medium border  transition-all duration-300 hover:bg-white/20 hover:scale-105 group"
           >
             <Home className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
             Go Home
@@ -187,31 +179,15 @@ const EventError = () => {
 
           <button
             onClick={() => window.history.back()}
-            className="flex items-center justify-center px-6 py-3 bg-white/10 backdrop-blur-sm text-black rounded-lg font-medium border border-white/20 transition-all duration-300 hover:bg-white/20 hover:scale-105 group"
+            className="flex items-center justify-center px-6 py-3 bg-white/10 backdrop-blur-sm text-black rounded-lg font-medium border  transition-all duration-300 hover:bg-white/20 hover:scale-105 group"
           >
             <ArrowLeft className="w-5 h-5 mr-2 group-hover:-translate-x-1 transition-transform" />
             Go Back
           </button>
         </div>
 
-        {/* Status Indicators */}
-        <div className="flex justify-center space-x-6 text-sm text-gray-800">
-          <div className="flex items-center space-x-2">
-            <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-            <span>System Status: Online</span>
-          </div>
-          <div className="flex items-center space-x-2">
-            <div className="w-2 h-2 bg-yellow-400 rounded-full animate-pulse"></div>
-            <span>Response Time: 120ms</span>
-          </div>
-        </div>
-
         {/* Fun Footer Message */}
         <div className="mt-8 text-gray-900 text-sm">
-          <p>
-            Error ID: EVT-{Date.now().toString().slice(-6)} • Timestamp:{' '}
-            {new Date().toLocaleTimeString()}
-          </p>
           <p className="mt-2 italic">
             Even the best events sometimes have hiccups! 🎉
           </p>

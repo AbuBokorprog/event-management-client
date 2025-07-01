@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import {
   Calendar,
   Users,
@@ -36,28 +36,10 @@ const EventLoader = () => {
       clearInterval(stepInterval);
       clearInterval(progressInterval);
     };
-  }, []);
+  }, [steps.length]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex items-center justify-center p-8">
-      {/* Background Animation */}
-      <div className="absolute inset-0 overflow-hidden">
-        {[...Array(20)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute animate-pulse"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 3}s`,
-              animationDuration: `${2 + Math.random() * 2}s`,
-            }}
-          >
-            <div className="w-1 h-1 bg-white/20 rounded-full"></div>
-          </div>
-        ))}
-      </div>
-
+    <div className="min-h-screen  bg-gradient-to-r from-purple-600/10 to-pink-600/10 flex items-center justify-center p-8">
       <div className="relative z-10 text-center max-w-md">
         {/* Main Logo/Brand Area */}
         <div className="mb-12">
@@ -66,13 +48,13 @@ const EventLoader = () => {
               <Calendar className="w-10 h-10 text-white animate-bounce" />
             </div>
             <div className="absolute -top-2 -right-2 w-6 h-6 bg-green-400 rounded-full flex items-center justify-center animate-pulse">
-              <CheckCircle2 className="w-4 h-4 text-white" />
+              <CheckCircle2 className="w-4 h-4 text-black" />
             </div>
           </div>
-          <h1 className="text-3xl font-bold text-white mb-2 tracking-tight">
+          <h1 className="text-3xl font-bold text-black mb-2 tracking-tight">
             EventHub
           </h1>
-          <p className="text-purple-200 text-sm">
+          <p className="text-purple-700 text-sm">
             Your events, perfectly managed
           </p>
         </div>
@@ -121,7 +103,7 @@ const EventLoader = () => {
                     className={`w-8 h-8 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 transition-all duration-500 ${
                       index === currentStep
                         ? `${step.color} scale-100 opacity-100`
-                        : 'text-white/30 scale-75 opacity-0'
+                        : 'text-black/30 scale-75 opacity-0'
                     }`}
                   />
                 );
@@ -132,7 +114,7 @@ const EventLoader = () => {
 
         {/* Loading Text */}
         <div className="mb-6">
-          <p className="text-white text-lg font-medium mb-2 h-7">
+          <p className="text-black text-lg font-medium mb-2 h-7">
             {steps[currentStep].text}
           </p>
           <div className="flex justify-center space-x-1">
@@ -147,22 +129,22 @@ const EventLoader = () => {
         </div>
 
         {/* Progress Bar */}
-        <div className="w-full bg-white/10 rounded-full h-2 mb-4 overflow-hidden">
+        <div className="w-full bg-black/10 rounded-full h-2 mb-4 overflow-hidden">
           <div
             className="h-full bg-gradient-to-r from-purple-500 via-pink-500 to-cyan-400 rounded-full transition-all duration-300 ease-out relative"
             style={{ width: `${progress}%` }}
           >
-            <div className="absolute inset-0 bg-white/20 animate-pulse rounded-full"></div>
+            <div className="absolute inset-0 bg-black animate-pulse rounded-full"></div>
           </div>
         </div>
 
         {/* Progress Percentage */}
-        <p className="text-purple-200 text-sm font-medium">
+        <p className="text-purple-700 text-sm font-medium">
           {Math.round(progress)}% Complete
         </p>
 
         {/* Feature Highlights */}
-        <div className="mt-8 grid grid-cols-2 gap-4 text-xs text-purple-200">
+        <div className="mt-8 grid grid-cols-2 gap-4 text-xs text-purple-700">
           <div className="flex items-center space-x-2 opacity-60">
             <div className="w-2 h-2 bg-green-400 rounded-full"></div>
             <span>Real-time sync</span>
