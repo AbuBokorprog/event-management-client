@@ -60,16 +60,19 @@ const EventFormModal = ({ isOpen, onClose, event }: EventFormModalProps) => {
   const onSubmit = async (data: any) => {
     data.userId = user?.id;
     data.attendeeCount = Number(data.attendeeCount);
-    data.dateTime = moment(event?.dateTime).toISOString();
+    if (data.dateTime) {
+      data.dateTime = moment(data.dateTime).toISOString();
+    }
     try {
       if (isEditMode) {
-        await updateEvent({ id: event._id, body: data }).unwrap();
+        await updateEvent({ id: event._id, data }).unwrap();
       } else {
         await createEvent(data).unwrap();
       }
+
       onClose();
-    } catch (err) {
-      console.error('Event Error:', err);
+    } catch (error: any) {
+      alert(error?.data?.message || 'Update failed!.');
     }
   };
 

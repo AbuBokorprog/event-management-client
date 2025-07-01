@@ -23,7 +23,11 @@ const MyEvents = () => {
 
   const handleDelete = (id: number) => {
     if (confirm('Are you sure you want to delete this event?')) {
-      deleteEvent(id).unwrap();
+      try {
+        deleteEvent(id).unwrap();
+      } catch (error: any) {
+        alert(error?.data?.message || 'Delete failed!.');
+      }
     }
   };
 

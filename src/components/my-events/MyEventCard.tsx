@@ -58,7 +58,11 @@ const MyEventCard: React.FC<MyEventCardProps> = ({
           </div>
         </div>
 
-        <p className="text-gray-700 text-sm">{event.description}</p>
+        <p className="text-gray-700 text-sm">
+          {event.description?.length > 50
+            ? `${event.description?.slice(0, 50)}...`
+            : event.description}
+        </p>
 
         <div className="flex justify-between gap-3 pt-4">
           <button
