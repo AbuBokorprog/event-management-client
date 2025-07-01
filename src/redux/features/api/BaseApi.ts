@@ -12,7 +12,7 @@ import { login, logout } from '../auth-slice/AuthSlice';
 import type { RootState } from '../../store';
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: 'http://localhost:5000',
+  baseUrl: 'https://event-management-backend-phi.vercel.app',
   credentials: 'include',
   prepareHeaders: (headers, { getState }) => {
     const token = (getState() as RootState).auth.token;
