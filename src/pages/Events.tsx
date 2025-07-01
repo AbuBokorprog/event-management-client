@@ -1,47 +1,64 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Search, MapPin, Calendar, Filter } from 'lucide-react';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import EventCard from '../components/events/EventCard';
+import EventFormModal from '../components/EventFormModal';
+import { useGetAllEventsQuery } from '../redux/features/api/eventApi';
+import EventLoader from '../components/EventLoader';
 
-const events = [
-  {
-    id: 1,
-    title: 'Summer Music Festival',
-    date: 'July 15, 2025',
-    location: 'Central Park, NY',
-    image: 'https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=400',
-    price: '$45',
-    category: 'Music',
-    attendees: 1250,
-    rating: 4.8,
-  },
-  {
-    id: 2,
-    title: 'Tech Innovation Summit',
-    date: 'August 2, 2025',
-    location: 'Silicon Valley, CA',
-    image: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=400',
-    price: '$120',
-    category: 'Technology',
-    attendees: 890,
-    rating: 4.9,
-  },
-  {
-    id: 3,
-    title: 'Art & Culture Expo',
-    date: 'July 28, 2025',
-    location: 'Museum District, TX',
-    image: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=400',
-    price: '$25',
-    category: 'Art',
-    attendees: 650,
-    rating: 4.7,
-  },
-];
+// const events = [
+//   {
+//     id: 1,
+//     title: 'Summer Music Festival',
+//     date: 'July 15, 2025',
+//     location: 'Central Park, NY',
+//     image: 'https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=400',
+//     price: '$45',
+//     category: 'Music',
+//     attendees: 1250,
+//     rating: 4.8,
+//   },
+//   {
+//     id: 2,
+//     title: 'Tech Innovation Summit',
+//     date: 'August 2, 2025',
+//     location: 'Silicon Valley, CA',
+//     image: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=400',
+//     price: '$120',
+//     category: 'Technology',
+//     attendees: 890,
+//     rating: 4.9,
+//   },
+//   {
+//     id: 3,
+//     title: 'Art & Culture Expo',
+//     date: 'July 28, 2025',
+//     location: 'Museum District, TX',
+//     image: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=400',
+//     price: '$25',
+//     category: 'Art',
+//     attendees: 650,
+//     rating: 4.7,
+//   },
+// ];
 
 const Events = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedEvent, setSelectedEvent] = useState(null);
+  const { data, isFetching, isLoading } = useGetAllEventsQuery({});
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  const openAddModal = () => {
+    setSelectedEvent(null);
+    setIsOpen(true);
+  };
+
+  if (isFetching || isLoading) {
+    return <EventLoader />;
+  }
 
   return (
     <div className="py-16 bg-gray-50 space-y-14">
@@ -91,18 +108,26 @@ const Events = () => {
       </section>
       <section>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center my-10">
+          <div className="text-center my-10 flex items-center justify-between">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">
               All Events
             </h2>
+            <button onClick={openAddModal} className="cursor-pointer">
+              + Add Event
+            </button>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {events.map((event) => (
+            {data?.data?.map((event: any) => (
               <EventCard event={event} />
             ))}
           </div>
         </div>
+        <EventFormModal
+          isOpen={isOpen}
+          onClose={() => setIsOpen(false)}
+          event={selectedEvent}
+        />
       </section>
     </div>
   );

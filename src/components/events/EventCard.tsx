@@ -10,7 +10,7 @@ const EventCard: React.FC<any> = ({ event }) => {
     >
       <div className="relative overflow-hidden">
         <img
-          src={event.image}
+          src={event.photoUrl}
           alt={event.title}
           className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300"
         />
@@ -48,7 +48,7 @@ const EventCard: React.FC<any> = ({ event }) => {
             <div className="flex items-center space-x-1">
               <Users className="w-4 h-4 text-gray-500" />
               <span className="text-sm text-gray-600">
-                {event.attendees} attending
+                {event.attendeeCount} attending
               </span>
             </div>
             <div className="flex items-center space-x-1">

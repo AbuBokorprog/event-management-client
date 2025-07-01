@@ -4,16 +4,17 @@ import Home from '../pages/Home';
 import Events from '../pages/Events';
 import Login from '../pages/Login';
 import Register from '../pages/Register';
-import AddEvent from '../pages/AddEvent';
 import MyEvents from '../pages/MyEvents';
 import About from '../pages/About';
 import Contact from '../pages/Contact';
+import PrivateRoute from '../provider/PrivateRoute';
+import EventError from '../pages/EventError';
 
 export const router = createBrowserRouter([
   {
     path: '/',
     element: <Main />,
-    errorElement: <div>Error</div>,
+    errorElement: <EventError />,
     children: [
       {
         path: '/',
@@ -21,11 +22,11 @@ export const router = createBrowserRouter([
       },
       {
         path: '/events',
-        element: <Events />,
-      },
-      {
-        path: '/add-event',
-        element: <AddEvent />,
+        element: (
+          <PrivateRoute>
+            <Events />
+          </PrivateRoute>
+        ),
       },
       {
         path: '/login',
@@ -37,7 +38,11 @@ export const router = createBrowserRouter([
       },
       {
         path: '/my-events',
-        element: <MyEvents />,
+        element: (
+          <PrivateRoute>
+            <MyEvents />
+          </PrivateRoute>
+        ),
       },
       {
         path: '/about',

@@ -1,13 +1,10 @@
 import { useState, useEffect } from 'react';
 import { Calendar, Menu, X } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import type { RootState } from '../../redux/store';
-import decodeToken from '../../utils/decodeToken';
+import { useAuth } from '../../provider/AuthContext';
 
 const Navbar = () => {
-  const { token } = useSelector((state: RootState) => state.auth);
-  const user = decodeToken(token as string);
+  const { user, logoutHandler } = useAuth();
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -31,7 +28,6 @@ const Navbar = () => {
   const navItems = [
     { label: 'Home', path: '/' },
     { label: 'Events', path: '/events' },
-    { label: 'Create Event', path: '/add-event' },
     { label: 'About', path: '/about' },
     { label: 'Contact', path: '/contact' },
   ];
@@ -80,6 +76,9 @@ const Navbar = () => {
               >
                 My Events
               </Link>
+              <button onClick={logoutHandler} className="cursor-pointer">
+                Logout
+              </button>
               <>
                 {user?.photoUrl ? (
                   <img src={user?.photoUrl} alt={user?.name} />
@@ -150,6 +149,9 @@ const Navbar = () => {
               >
                 My Events
               </Link>
+              <button onClick={logoutHandler} className="cursor-pointer">
+                Logout
+              </button>
               <>
                 {user?.photoUrl ? (
                   <img src={user?.photoUrl} alt={user?.name} />
